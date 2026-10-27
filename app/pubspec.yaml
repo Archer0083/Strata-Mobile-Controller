@@ -1,0 +1,135 @@
+name: strata_mobile_controller
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 0.0.10+10
+
+environment:
+  sdk: ^3.13.5
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # v0.0.7：消息摘要按字素截断（export_service.messageExcerpt）
+  characters: ^1.3.0
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+
+  # ---- 核心依赖（dio / riverpod / secure_storage / sqflite 等）----
+  dio: ^5.7.0 # 网络层：请求 + 流式 SSE 手动解析（ADR-4）
+  flutter_riverpod: ^2.6.1 # 状态管理（ADR-3）
+  flutter_secure_storage: ^9.2.2 # API Key 安全存储：Android Keystore（ADR-5）
+  # M1-8：当前激活 Profile id 持久化（非敏感，ADR-5 与 Profile 数据分层）
+  shared_preferences: ^2.3.2
+  # M1-7：监控不可用时「打开 WebUI」兜底入口
+  url_launcher: ^6.3.0
+
+  # ---- 数据层与四格式导出（markdown / pdf / share_plus 等）----
+  sqflite: ^2.4.1 # 会话/消息本地持久化（SQLite，App 私有目录）
+  path: ^1.9.0 # 数据库文件路径拼接（sqflite 标准搭档）
+  path_provider: ^2.1.5 # App 私有目录定位（导出临时文件落盘，不写公共 Download）
+  share_plus: ^12.0.0 # 系统分享面板（导出零权限链路：私有目录 → 分享）
+  file_picker: ^10.3.10 # SAF 文件选择（.json 导入专用）；选型：11.x 在 AGP≥9 跳 KGP 致 .kt 不编译（builtInKotlin=false），12.x/13.x 联邦化后 windows_file_picker 全系 win32 ^6.3.0 与 share_plus/secure_storage 冲突，10.3.11 被官方撤回 → 10.3.10 为唯一满足「依赖兼容+KGP 无条件应用」的版本（其自声明 KGP 1.8.22 会被宿主 KGP 2.4.0 顶替）
+  pdf: ^3.11.3 # PDF 生成（须内嵌 CJK 静态字体，见 ADR-9 决策 3）
+  meta: ^1.15.0 # @visibleForTesting 注解（app_database 测试注入点；Flutter SDK 自带，显式声明）
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  # M1-12：host 单测的 sqflite FFI 实现（ChatController 写穿在测试中触达 DB；
+  # Windows 10+ 回退系统 winsqlite3.dll，无需 sqlite3_flutter_libs）
+  sqflite_common_ffi: ^2.3.3
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^6.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # M1-12（ADR-9 决策 3）：PDF 导出内嵌 CJK 静态字体。
+  # 源：Source Han Sans SC Regular（OFL）→ CFF 转 glyf（otf2glyf.py）→ 子集化
+  # （subset_cjk.py，覆盖 ASCII/标点/全角 + U+4E00-9FFF 全量 20902 汉字）。
+  # 必须为 glyf 轮廓：pdf 包只写 glyf/loca 表，CFF 字体无法被它子集化。
+  # rootBundle 按字节读取给 pdf 包，不注册为 UI 字体；导出时 pdf 包按用到的
+  # 字形子集嵌入（实测中文 PDF 11.9KB）。
+  # 缺失时 ExportService 降级 Helvetica（中文缺字），构建不报错。
+  assets:
+    - assets/fonts/cjk-regular.ttf
+
+  # M2-1：Outfit 变量字体静态实例（woff2 → ttf 实例化，fontTools）。
+  # 源：引擎 web 端内置的 Outfit 字体（OFL 1.1）。
+  # 拉丁/数字用 Outfit，中文回退系统字体（fontFamilyFallback 不需配置——
+  # Flutter 缺字自动回退）。仅 UI 字体，四个静态权重 ~132KB。
+  fonts:
+    - family: Outfit
+      fonts:
+        - asset: assets/fonts/Outfit-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Outfit-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Outfit-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Outfit-Bold.ttf
+          weight: 700
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/to/asset-from-package
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package

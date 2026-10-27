@@ -1,0 +1,45 @@
+# 声明（NOTICE）
+
+## 本项目
+
+Strata Mobile Controller
+Copyright (c) 2026 Archer0083
+
+基于 MIT 许可证发布 —— 详见 [LICENSE](LICENSE)。
+
+本项目是一个独立的第三方客户端项目，与 Strata 推理引擎的维护者无隶属关系，
+未获得其认可、赞助或批准，也不把 Strata 名称作为商标主张使用。
+文中提及上游项目，仅用于说明与其公开 HTTP API 的兼容性。
+
+上游引擎、其源代码及其模型权重**均未**在本仓库中重新分发。
+本仓库仅包含客户端应用本身。
+
+## 打包的第三方资源
+
+### 字体
+
+| 文件 | 字族 | 许可证 | 来源 |
+|---|---|---|---|
+| `app/assets/fonts/Outfit-Regular.ttf` | Outfit | SIL Open Font Licence 1.1 | 上游 web 端字体目录（拉丁子集，OFL-1.1） |
+| `app/assets/fonts/Outfit-Medium.ttf` | Outfit | SIL Open Font Licence 1.1 | 同上 |
+| `app/assets/fonts/Outfit-SemiBold.ttf` | Outfit | SIL Open Font Licence 1.1 | 同上 |
+| `app/assets/fonts/Outfit-Bold.ttf` | Outfit | SIL Open Font Licence 1.1 | 同上 |
+| `app/assets/fonts/cjk-regular.ttf` | 思源黑体（Source Han Sans SC，Regular） | SIL Open Font Licence 1.1 | Adobe Source Han Sans / Noto Sans CJK，子集化为 ASCII、标点、全角字符与 CJK 统一表意文字区段（U+4E00–U+9FFF） |
+
+SIL Open Font Licence 1.1 允许打包与再分发这些字体，包括修改与子集化后的形式，
+前提是不单独出售字体，且修改版本不使用保留字体名称。
+
+CJK 字体文件是子集：它由 CFF 轮廓转换为 TrueType 轮廓，并按上表列出的字符范围
+做了子集化，以控制 APK 体积。它不是完整的字体发行版。
+
+### Dart 与 Flutter 依赖包
+
+本应用依赖发布在 [pub.dev](https://pub.dev) 上的第三方依赖包，各自适用其自身的许可证。
+含解析后版本的权威清单为 `app/pubspec.lock`。主要依赖包括 `dio`、`flutter_riverpod`、
+`flutter_secure_storage`、`shared_preferences`、`url_launcher`、`sqflite`、
+`share_plus`、`file_picker` 与 `pdf`。
+
+## 商标
+
+本项目中提及的产品名称、标识与品牌均归其各自所有者所有。
+此处使用仅用于指代，不代表任何背书、隶属或赞助关系。

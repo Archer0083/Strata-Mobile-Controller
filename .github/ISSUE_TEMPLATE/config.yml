@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 提问与使用求助
+    url: https://github.com/Archer0083/Strata-Mobile-Controller/discussions
+    about: 询问安装配置、WireGuard 配置、连接问题或导出格式。
+  - name: 上游项目中的第三方客户端讨论
+    url: https://github.com/Niko1221/Strata/discussions
+    about: 阅读或参与关于引擎移动端客户端的讨论帖。

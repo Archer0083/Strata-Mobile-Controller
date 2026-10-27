@@ -1,0 +1,107 @@
+name: 缺陷报告
+
+description: 应用的行为与预期不符
+labels: ["bug", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你抽时间反馈这个问题。
+
+        请尽量把信息填全 —— 上下文越充分，我们定位得越快。如果问题涉及连接引擎，
+        请先看 README 的**已知限制**一节：部分行为取决于你正在运行的引擎版本。
+
+  - type: input
+    id: app-version
+    attributes:
+      label: 应用版本
+      description: 在应用的「关于」页面以及版本信息行中显示。
+      placeholder: "0.0.10"
+    validations:
+      required: true
+
+  - type: input
+    id: engine-version
+    attributes:
+      label: 主机上的 Strata 版本
+      description: 如果你知道引擎版本请填写，不清楚可留空。
+      placeholder: "unknown"
+    validations:
+      required: false
+
+  - type: input
+    id: android-version
+    attributes:
+      label: Android 版本与设备型号
+      description: "例如：Android 14，Pixel 7"
+      placeholder: "Android 13，小米 13"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: connection
+    attributes:
+      label: 你通过什么方式访问引擎？
+      options:
+        - WireGuard VPN（虚拟 IP）
+        - 同一局域网，直接使用 IP
+        - 其他隧道 / SSH
+        - 不涉及
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 问题出在应用的哪一部分？
+      options:
+        - 对话
+        - 监控
+        - 控制
+        - 会话 / 导入 / 导出
+        - 连接 / 设置
+        - 关于 / 引擎信息
+        - 图片
+        - 构建 / 安装
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么？
+      description: 你预期是什么？实际得到的是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 请编号，步骤尽量精简，并保证从全新启动 App 后可以复现。
+      placeholder: |
+        1. 打开「控制」标签页
+        2. 点击「卸载」
+        3. 观察到……
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志或截图
+      description: >
+        粘贴相关的 logcat 输出，或者附上截图。请务必遮蔽你的 API Key、
+        WireGuard 私钥，以及任何你不想公开的内网 IP 地址。
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 检查清单
+      options:
+        - label: 我已搜索过现有的 issue 与讨论，确认没有相同问题
+          required: true
+        - label: 我已从上述所有内容中移除 API Key 与 WireGuard 等敏感信息
+          required: false

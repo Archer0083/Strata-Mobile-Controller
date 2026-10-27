@@ -1,0 +1,75 @@
+name: 功能建议
+
+description: 提出一项新能力或改进
+labels: ["enhancement", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你的建议。简单说明你想解决的问题会很有帮助 ——
+        这能让我们判断这个需求是否足够具体、是否可以直接落地。
+
+        本客户端的定位被有意限定为*用手机控制本地引擎*。
+        需要改动引擎本身的请求属于上游项目，不在这里处理。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你想解决什么问题？
+      description: 描述具体场景，而不只是你心里已有的那个解决方案。
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提议的改动
+      description: 你希望应用的行为发生什么变化？
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 涉及应用的哪一部分？
+      options:
+        - 对话
+        - 监控
+        - 控制
+        - 会话 / 导入 / 导出
+        - 连接 / 设置
+        - 关于 / 引擎信息
+        - 图片
+        - 新页面或新的顶层功能
+        - 其他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: engine-support
+    attributes:
+      label: 这个需求依赖某项特定的引擎能力吗？
+      description: >
+        有些需求只有在引擎提供特定接口时才能实现。应用本身无法为引擎新增功能。
+      options:
+        - 否，现有的 HTTP API 就能满足
+        - 是，需要某个可能尚不存在的接口
+        - 不确定
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 你考虑过的替代方案
+      description: 如果适用，也请写出「我现在用 web 端界面就能做到」。
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 检查清单
+      options:
+        - label: 我已搜索过现有的 issue 与讨论，确认没有相同需求
+          required: true

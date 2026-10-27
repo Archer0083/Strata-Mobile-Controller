@@ -1,0 +1,76 @@
+# Git ignore rules for Strata Mobile Controller monorepo
+
+# ---- Flutter / Dart (app/) ----
+# 注意：App 工程的 pubspec.lock、android/gradlew、gradle-wrapper.jar 需要提交，勿忽略
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.pub-cache/
+**/.pub/
+**/.fvm/
+**/.metadata~  # Windows 临时文件兜底
+**/build/
+**/coverage/
+**/doc/api/
+app/.idea/
+app/.vscode/
+
+# Android generated / local
+**/android/.gradle/
+**/android/captures/
+**/android/local.properties
+**/key.properties
+**/local.properties
+*.jks
+*.keystore
+# 上传签名密钥绝不入库；开源发布用 CI 或本地签名
+
+# ---- Python (server-bridge/) ----
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+# 注意：根目录 dist/ 存放发布 APK —— 但 APK 超 GitHub 100MB 单文件限制，
+# 改为通过 Release 附件分发（上限 2GB），sha256 校验文件仍入库供校验
+dist/*.apk
+app/build/
+server-bridge/dist/
+
+# ---- Secrets & env (API Key、WireGuard 私钥等绝不入库) ----
+*.env
+.env.*
+secrets/
+*.pem
+*.key
+# WireGuard 真实配置不入库；公开示例模板放 docs/ 并命名为 *.conf.example
+wg*.conf
+*.conf.example !docs/
+
+# ---- IDE / editor ----
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Logs & agent 中间产物 ----
+*.log
+logs/
+.claude/
+.trae/
+
+# ---- 本地工具链（Flutter SDK 等，不入库）----
+tools/
