@@ -32,28 +32,20 @@
 
 ---
 
-## 界面一览
+## 📥 下载 APK
 
-<table>
-<tr>
-<td width="50%"><img src="assets/screenshots/01-chat-dark-image-message.jpg" alt="深色主题对话页，含图片消息"></td>
-<td width="50%"><img src="assets/screenshots/07-monitor-dark.jpg" alt="深色主题监控仪表盘"></td>
-</tr>
-<tr>
-<td align="center"><em>对话 —— 流式输出、思考链折叠、图片附件</em></td>
-<td align="center"><em>监控 —— 引擎状态、GPU 指标、实时请求日志</em></td>
-</tr>
-<tr>
-<td width="50%"><img src="assets/screenshots/12-control-models-context.jpg" alt="控制页，含已安装模型与上下文长度"></td>
-<td width="50%"><img src="assets/screenshots/05-about-dark-engine.jpg" alt="关于页，展示引擎详情"></td>
-</tr>
-<tr>
-<td align="center"><em>控制 —— 加载/卸载模型、设置上下文长度</em></td>
-<td align="center"><em>关于 —— 引擎、硬件与 API 详情</em></td>
-</tr>
-</table>
+> **[⬇️ 点击下载 v0.0.10 APK](https://github.com/Archer0083/Strata-Mobile-Controller/releases/tag/v0.0.10)**
+> 文件名 `strata-mobile-controller-v0.0.10-debug.apk`（约 174 MB）· 全部 Releases → [Releases 页面](https://github.com/Archer0083/Strata-Mobile-Controller/releases)
 
-> **📖 全部 27 张界面截图与逐项功能说明 → [界面功能说明](docs/screenshots.md)**
+安装前请知悉：
+
+| | |
+|---|---|
+| **系统要求** | Android 6.0（API 23）及以上，ARM64 / ARMv7 均可 |
+| **签名状态** | 当前为 **debug 未签名包**，首次安装需在系统设置中允许「安装未知来源应用」 |
+| **权限申请** | 不申请存储 / 相机 / 麦克风权限；API Key 存于 Android Keystore |
+
+> ⚠️ 本包为内测版本，尚未配置 release 签名流程，请勿用于生产环境。
 
 ---
 
@@ -77,7 +69,8 @@ Strata 可以在你自己的 GPU 上跑大模型，也自带 WebUI。坐在电�
 | 🎚️ | **思考强度可调** | 按消息设置：`none` / `low` / `medium` / `high` |
 | 🖼️ | **图片消息** | 从手机选图发送，随会话持久化，重启后依然可见 |
 | 💾 | **本地会话库** | 端侧 SQLite，按主机分组，支持置顶 / 改名 / 删除 |
-| 📤 | **四格式导出** | `.md` / `.json` / `.html` / `.pdf`，其中 `.json` 可回导 |
+| 📤 | **对话内容四格式导出** | 整个会话的**对话内容**可导出为 `.md` / `.json` / `.html` / `.pdf` 四种格式，其中 `.json` 可回导 |
+| 🖼️ | **单条回复一键生成截图分享** | 任意一条消息（含模型回复）可一键生成**长截图**并调起系统分享，超长内容自动分片 |
 | 📥 | **导入自动识别** | 单个会话还是整包会话，App 自动嗅探判定 |
 | 📊 | **实时监控** | GPU 负载 / 显存 / 温度 / 功耗 / PCIe / CPU、decode 与 prefill tok/s、KV 缓存命中率、请求队列 |
 | 🎛️ | **引擎控制** | 加载/卸载模型、列出已安装模型、设置上下文长度 |
@@ -86,12 +79,144 @@ Strata 可以在你自己的 GPU 上跑大模型，也自带 WebUI。坐在电�
 | 🔐 | **密钥存于 Keystore** | API Key 存 Android Keystore，绝不离开设备 |
 | 🧭 | **内置连接指南** | 首次使用与网络配置的图文指引 |
 
+---
+
+## 界面一览
+
+全部 **25 张**界面截图按**使用逻辑顺序**单排呈现，浅色与深色主题**分组不混排**。
+
+### 浅色主题
+
+#### 1 · 连接配置
+
+<img src="assets/screenshots/connection-01-light.jpg" alt="编辑连接页，填写主机地址、端口与 API Key" width="260">
+
+*填写配置名称、主机地址、端口与 API Key；内网 / WireGuard 网段地址会提示「推荐经隧道访问」。*
+
+<img src="assets/screenshots/connection-02-light-success.jpg" alt="编辑连接页，测试连接成功" width="260">
+
+*测试连接成功后显示绿色成功提示与当前模型名。*
+
+#### 2 · 对话
+
+<img src="assets/screenshots/chat-05-light-empty-state.jpg" alt="对话页空状态" width="260">
+
+*空状态引导：新建会话或恢复历史会话。*
+
+<img src="assets/screenshots/chat-02-light-long-answer.jpg" alt="长篇回答的渲染效果" width="260">
+
+*长回答完整渲染：Markdown 表格、列表、代码块在窄屏自动换行，不横向溢出。*
+
+<img src="assets/screenshots/chat-03-light-image-thinking.jpg" alt="思考过程以可折叠区块展示" width="260">
+
+*思考过程独立成块、可折叠展开，与正文视觉分离。*
+
+<img src="assets/screenshots/chat-04-light-markdown.jpg" alt="Markdown 渲染细节" width="260">
+
+*标题层级、引用块、行内代码、加粗与链接的渲染细节。*
+
+#### 3 · 会话管理
+
+<img src="assets/screenshots/drawer-01-light.jpg" alt="会话抽屉" width="260">
+
+*侧边抽屉列出全部会话，按主机分组，支持置顶 / 改名 / 删除。*
+
+<img src="assets/screenshots/session-data-01-light.jpg" alt="会话数据管理页" width="260">
+
+*展示 App 本地存储的全部内容（会话、附件、导出文件），可查看与清理。*
+
+#### 4 · 导出与分享
+
+<img src="assets/screenshots/export-01-light-format-sheet.jpg" alt="会话操作面板，四种导出格式可选" width="260">
+
+*「导出当前会话」可选 `.md` / `.json` / `.html` / `.pdf` 四种格式，导出的都是对话内容。*
+
+<img src="assets/screenshots/export-03-light-screenshot-share.jpg" alt="单条回复生成截图并分享" width="260">
+
+*单条消息一键生成**长截图**并调起系统分享面板。*
+
+<img src="assets/screenshots/export-02-dark-share-md.jpg" alt="导出 Markdown 后调起系统分享面板" width="260">
+
+*导出 `.md` 后分享文件给微信 / 文件管理 / 任意应用，各设备均可用。*
+
+<img src="assets/screenshots/import-01-light-preview.jpg" alt="导入预览" width="260">
+
+*导入前自动识别单个会话还是整包会话，并在写入前给出预览。*
+
+#### 5 · 监控
+
+<img src="assets/screenshots/monitor-02-light.jpg" alt="监控仪表盘" width="260">
+
+*模型状态、速度折线、GPU 负载 / 显存 / 温度 / 功耗、PCIe / CPU 指标卡片。*
+
+#### 6 · 引擎控制
+
+<img src="assets/screenshots/control-01-light-loaded.jpg" alt="控制页，模型已加载" width="260">
+
+*引擎运行状态卡片：模型名、加载状态徽章、加载 / 卸载按钮。*
+
+<img src="assets/screenshots/control-02-light-models-context.jpg" alt="已安装模型与上下文长度设置" width="260">
+
+*已安装模型列表与上下文长度设置（写入主机配置，**需重启主机后生效**）。*
+
+<img src="assets/screenshots/control-03-light-unloaded.jpg" alt="模型未加载状态" width="260">
+
+*未加载时 Load / Unload 按钮因 busy 状态不可用，界面给出说明。*
+
+<img src="assets/screenshots/control-04-light-loaded.jpg" alt="模型加载完成后的状态" width="260">
+
+*加载完成，徽章变为绿色 Loaded，并提示主机已开启自动加载。*
+
+<img src="assets/screenshots/control-05-light-unload-confirm.jpg" alt="卸载模型确认对话框" width="260">
+
+*卸载前确认对话框，附「等待进行中的请求完成（最长 120s）」选项。*
+
+#### 7 · 设置、指南与关于
+
+<img src="assets/screenshots/settings-01-light.jpg" alt="设置总览" width="260">
+
+*外观主题、连接管理、帮助与连接指南、会话数据、开发者信息入口。*
+
+<img src="assets/screenshots/guide-01-light.jpg" alt="App 内连接指南" width="260">
+
+*首次配置指引：两端 WireGuard 配置、常见错误、各页面用途。*
+
+<img src="assets/screenshots/about-02-light-engine.jpg" alt="关于页，引擎信息" width="260">
+
+*引擎信息卡：引擎版本、模型、设备与后端等运行参数。*
+
+### 深色主题
+
+<img src="assets/screenshots/chat-01-dark-image-message.jpg" alt="深色主题对话页，含图片消息" width="260">
+
+*对话 · 深色：流式输出、思考链折叠、图片附件。*
+
+<img src="assets/screenshots/monitor-01-dark.jpg" alt="深色主题监控仪表盘" width="260">
+
+*监控 · 深色：引擎状态、GPU 指标、实时请求日志。*
+
+<img src="assets/screenshots/settings-02-dark.jpg" alt="深色主题设置页" width="260">
+
+*设置 · 深色：与浅色版信息层级完全一致。*
+
+<img src="assets/screenshots/about-01-dark-engine.jpg" alt="深色主题关于页" width="260">
+
+*关于 · 深色：引擎、硬件与 API 详情。*
+
+<img src="assets/screenshots/export-02-dark-share-md.jpg" alt="深色主题下的文件分享面板" width="260">
+
+*分享面板 · 深色：系统分享界面叠在浅色 App 之上的实际呈现。*
+
+> **📖 全部 25 张截图的逐项功能说明 → [界面功能说明](docs/screenshots.md)**
+
+---
+
 ### 监控面板与 WebUI 对齐
 
 监控仪表盘在布局与信息层级上对齐引擎自带的 Web 界面——同样的状态徽章、同一套指标、
 同样的 tone 配色折线——确保手机上读到的信息与桌面上读到的一致。
 
-![监控仪表盘（完整长图）](assets/screenshots/26-monitor-dark-full.jpg)
+<img src="assets/screenshots/monitor-01-dark.jpg" alt="监控仪表盘，布局与信息层级对齐引擎自带 WebUI" width="300">
 
 ## 运行要求
 
@@ -146,14 +271,14 @@ App 内另有一份连接指南，含完整步骤与排障方法 —— 见下�
 
 点击**测试连接**。出现绿色成功提示并显示当前模型，即已就绪。
 
-<img src="assets/screenshots/24-connection-edit-light-success.jpg" alt="连接配置编辑页，显示连接测试成功" width="380">
+<img src="assets/screenshots/connection-02-light-success.jpg" alt="连接配置编辑页，显示连接测试成功" width="380">
 
 ## App 内连接指南
 
 首次配置时，App 可以带你一步步走完。
 路径：**设置 → 帮助 → 连接指南**，也可点连接页右上角的 `?` 按钮。
 
-<img src="assets/screenshots/15-connection-guide.jpg" alt="App 内连接指南，涵盖网络配置与各页面职责" width="380">
+<img src="assets/screenshots/guide-01-light.jpg" alt="App 内连接指南，涵盖网络配置与各页面职责" width="380">
 
 内容包括首次使用的三步流程、两端 VPN 配置、常见错误，以及 App 各页面各自的用途。
 
@@ -168,13 +293,28 @@ App 内另有一份连接指南，含完整步骤与排障方法 —— 见下�
 | `.html` | ✅ | — | 自包含页面，任意浏览器可打开 |
 | `.pdf` | ✅ | — | 中文排版正确——字体已内置并做子集化 |
 
-<img src="assets/screenshots/18-export-format-sheet.jpg" alt="导出面板，提供四种输出格式" width="320">
+<img src="assets/screenshots/export-01-light-format-sheet.jpg" alt="导出面板，提供四种输出格式" width="320">
 
 导入时会自动识别你给的是单个会话还是整包会话，并在写入前给出预览：
 
-<img src="assets/screenshots/19-import-preview.jpg" alt="导入预览对话框，识别出单个会话" width="320">
+<img src="assets/screenshots/import-01-light-preview.jpg" alt="导入预览对话框，识别出单个会话" width="320">
 
 由于 `.json` 可回导，导出导入同时也是一套备份机制，以及在两台手机之间迁移会话的方式。
+
+### 单条回复一键生成截图分享
+
+除了整会话导出，任意一条**单独消息**（模型回复或你的提问）都可以一键渲染成长截图并调起系统分享——
+适合把某一段结论直接发给别人，而不必导出整个会话。
+
+<img src="assets/screenshots/export-03-light-screenshot-share.jpg" alt="单条消息生成长截图并调起分享" width="320">
+
+- **长截图**：内容任意长都不截断，生成的是一张（或几张）纵向完整长图。
+- **超长自动分片**：内容超过单张 GPU 纹理上限时自动分为多张连续编号的图片，一次分享。
+- **带思考内容**：若该条消息含 reasoning，截图会一并呈现思考块。
+- **中文排版正确**：复用内置 CJK 字体，不出现豆腐块。
+
+> ⚠️ 直接分享图片依赖厂商分享面板实现，跨机型不稳定。失败时 App 会明确提示，
+> 退路是导出 `.md` 后分享文件——该方式在各设备上均可用。
 
 ## 自行构建
 
@@ -257,7 +397,7 @@ Strata-Mobile-Controller/
 │   │   └── widgets/        # 通用组件
 │   ├── test/               # 255 个单元与组件测试
 │   └── assets/fonts/       # 内置 OFL 字体
-├── assets/screenshots/      # 27 张界面截图
+├── assets/screenshots/      # 25 张界面截图
 ├── server-bridge/mock/     # 无需 GPU 的 mock 引擎
 ├── docs/                   # 用户手册、界面功能说明、UI 规范、接入规范
 ├── dist/                   # 发布版 APK 与校验和
@@ -269,7 +409,7 @@ Strata-Mobile-Controller/
 | 文档 | 内容 |
 |---|---|
 | [用户手册](docs/用户手册.md) | 安装、连接配置、网络配置、逐页说明、FAQ、排障 |
-| [界面功能说明](docs/screenshots.md) | 27 张截图逐项说明，每张界面的功能与可读出的信息 |
+| [界面功能说明](docs/screenshots.md) | 25 张截图逐项说明，每张界面的功能与可读出的信息 |
 | [UI 设计规范](docs/ui-design-spec.md) | 布局、间距、色彩 token，以及 App 遵循的措辞规范 |
 | [移动端接入规范](docs/mobile-integration-spec.md) | 引擎 HTTP 接口的移动端接入要点（流式格式、错误行为） |
 | [移动端接入规范（英文版）](docs/mobile-integration-spec.en.md) | 同一份文档的英文版，也是提交给上游引擎项目的文档草案 |
