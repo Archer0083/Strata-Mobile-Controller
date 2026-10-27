@@ -4,7 +4,7 @@
 
 **在手机上控制你自己机器上运行的 [Strata](https://github.com/Niko1221/Strata) 推理引擎。**
 
-通过私有网络，随时与本地引擎流式对话、实时监控、加载卸载模型。
+通过私有网络，随时与本地引擎流式对话、实时监控、加载卸载模型。一个Strata 第三方 Android 客户端，支持通过局域网或远程地址连接本地 Strata 推理引擎，提供移动端对话、记忆与模型管理能力。可通过公网 IP、反向代理、内网穿透或 VPN 实现远程访问。出于个人移动端访问Strata部署的私有算力的需求独立开发，目前项目独立维护，非 Strata 官方应用。现已提供安卓系统的apk安装包开放内测，欢迎大家使用和提出您宝贵的建议。
 
 [![Flutter](https://img.shields.io/badge/Flutter-stable-02569B?logo=flutter&logoColor=white)](https://docs.flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-%5E3.13.5-0175C2?logo=dart&logoColor=white)](https://dart.dev/)
